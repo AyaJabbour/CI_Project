@@ -7,7 +7,7 @@ pipeline {
         stage('Clonage') {
             steps {
                 git branch: 'main',
-                    url: 'URL_REPO'
+                    url: 'https://github.com/AyaJabbour/CI_Project.git'
             }
         }
 

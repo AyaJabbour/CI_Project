@@ -7,10 +7,9 @@ pipeline {
         stage('Clonage') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/AyaJabbour/CI_Project.git'
+                url: https://github.com/AyaJabbour/CI_Project.git
             }
         }
-
         stage('Vérification Python') {
             steps {
                 bat 'python --version'
@@ -21,6 +20,12 @@ pipeline {
         stage('Installation des dépendances') {
             steps {
                 bat 'python -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Analyse qualité code - Pylint') {
+            steps {
+                bat 'python -m pylint calculator.py --fail-under=8'
             }
         }
 
@@ -35,14 +40,11 @@ pipeline {
         always {
             echo 'Pipeline terminé'
         }
-
         success {
             echo 'BUILD SUCCESS'
         }
-
         failure {
             echo 'BUILD FAILED'
         }
     }
 }
-
